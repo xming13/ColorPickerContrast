@@ -105,11 +105,11 @@
               <form role="form">
                 <div class="form-group">
                   <label for="colorBg" class="control-label">Background Color</label>
-                  <input id="colorBg" class="color {pickerPosition: 'right', onImmediateChange:'updateBackgroundColor(this);'} form-control" value="FFE957" />
+                  <input id="colorBg" class="color {pickerPosition: 'bottom right', onImmediateChange:'updateBackgroundColor(this);'} form-control" value="FFE957" />
                 </div>
                 <div class="form-group">
                   <label for="colorText" class="control-label">Text Color</label>
-                  <input id="colorText" class="color {pickerPosition: 'right', onImmediateChange:'updateTextColor(this);'} form-control" value="960000" />
+                  <input id="colorText" class="color {pickerPosition: 'bottom', onImmediateChange:'updateTextColor(this);'} form-control" value="960000" />
                 </div>
                 <div class="form-group">
                   <label for="inputFontSize" class="control-label">Font Size (in px)</label>
@@ -127,6 +127,10 @@
             <h3 class="panel-title">Here's your result</h3>
           </div>        
           <div class="panel-body">
+            <p>
+              Color Contrast Ratio :
+              <span id="result-ratio"></span>
+            </p>
             <p>
               <table class="table table-bordered table-responsive">
                 <tr>
