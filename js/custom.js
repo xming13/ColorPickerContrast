@@ -1,12 +1,49 @@
 window.onload = function() {
   updateBackgroundColor(document.getElementById("colorBg").value);
   updateTextColor(document.getElementById("colorText").value);
+  
   $('#preview-text').hallo({
     plugins: {
       'halloformat' : { formattings: { "underline" : true } }
     }
   });
-}
+  $("#inputFontSize").keyup(function(){
+    $("#inputFontSize").blur();
+    $("#inputFontSize").focus();
+  });
+
+  $("#inputFontSize").keydown(function(event){
+    var inputSize = $("#inputFontSize").val();
+    if (isPositiveInteger(inputSize)) {
+      if (event.which == 38) {
+        inputSize++;
+        $("#inputFontSize").val(inputSize);
+        $("#inputFontSize").change();
+      }
+      if (event.which == 40) {
+        if (inputSize > 1) {
+          inputSize--;
+          $("#inputFontSize").val(inputSize);
+          $("#inputFontSize").change();
+        }
+      }
+    }
+  });
+
+  $("#inputFontSize").change(function(){
+    if ( isPositiveInteger($("#inputFontSize").val())) {
+      $("#preview-text").css('font-size', $("#inputFontSize").val() +'px');
+    }
+  });
+
+  var isFirstClicked = true;
+  $("#preview-text").click(function() {
+    if (isFirstClicked) {
+      $("#preview-text").html("");
+      isFirstClicked = false;
+    }
+  })
+};
 
 function updateBackgroundColor(color) {
   document.getElementById('preview-text').style.backgroundColor = '#' + color;
@@ -74,39 +111,3 @@ function displayPassFail(elem, isPassed) {
 function isPositiveInteger(n) {
   return /^\+?[1-9]\d*$/.test(n);
 }
-$("#inputFontSize").keyup(function(){
-  $("#inputFontSize").blur();
-  $("#inputFontSize").focus();
-});
-
-$("#inputFontSize").keydown(function(event){
-  var inputSize = $("#inputFontSize").val();
-  if (isPositiveInteger(inputSize)) {
-    if (event.which == 38) {
-      inputSize++;
-      $("#inputFontSize").val(inputSize);
-      $("#inputFontSize").change();
-    }
-    if (event.which == 40) {
-      if (inputSize > 1) {
-        inputSize--;
-        $("#inputFontSize").val(inputSize);
-        $("#inputFontSize").change();
-      }
-    }
-  }
-});
-
-$("#inputFontSize").change(function(){
-  if ( isPositiveInteger($("#inputFontSize").val())) {
-    $("#preview-text").css('font-size', $("#inputFontSize").val() +'px');
-  }
-});
-
-var isFirstClicked = true;
-$("#preview-text").click(function() {
-  if (isFirstClicked) {
-    $("#preview-text").html("")
-    isFirstClicked = false;
-  }
-})
